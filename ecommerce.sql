@@ -34,6 +34,7 @@ CREATE TABLE `profile` (
   `profile_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `first_name` varchar(50) NOT NULL,
+  `middle_name` varchar(50) NOT NULL,
   `last_name` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -41,8 +42,8 @@ CREATE TABLE `profile` (
 -- Dumping data for table `profile`
 --
 
-INSERT INTO `profile` (`profile_id`, `user_id`, `first_name`, `last_name`) VALUES
-(3, 1, 'Mister', 'Blue');
+INSERT INTO `profile` (`profile_id`, `user_id`, `first_name`, `middle_name` , `last_name`) VALUES
+(3, 1, 'Mister', 'Grand', 'Blue');
 
 -- --------------------------------------------------------
 
@@ -64,6 +65,41 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`user_id`, `username`, `password_hash`, `active`) VALUES
 (1, 'Tarzan', '$2y$10$.c/0uj/ezTONgPUYzD/8auuOtxC.pllo8LOotHZVecYKP3XV3EmgK', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `publication`
+--
+
+DROP TABLE IF EXISTS `publication`;
+CREATE TABLE `publication` (
+  `publication_id` int(11) NOT NULL,
+  `profile_id` int(11) NOT NULL,
+  `publication_title` varchar(50) NOT NULL,
+  `publication_text` varchar(50) NOT NULL,
+  `timestamp` varchar(50) NOT NULL,
+  `publication_status` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `publication_comment`
+--
+
+DROP TABLE IF EXISTS `publication_comment`;
+CREATE TABLE `publication_comment` (
+  `publication_comment_id` int(11) NOT NULL,
+  `profile_id` int(11) NOT NULL,
+  `publication_id` int(11) NOT NULL,
+  `publication_text` varchar(50) NOT NULL,
+  `timestamp` varchar(50) NOT NULL,
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
 
 --
 -- Indexes for dumped tables

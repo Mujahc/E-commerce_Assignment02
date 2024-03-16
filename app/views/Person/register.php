@@ -16,14 +16,9 @@
 			<div class="form-group">
 				<label>Email address:<input type="email" class="form-control" name="email" placeholder="jondoe@email.com" /></label>
 			</div>
+
 			<div class="form-group">
-					<label><input type="checkbox" name="publications[]" value="mailing_list">Include me on the mailing list</label>
-			</div>
-			<div class="form-group">
-				<label><input type="checkbox" name="publications[]" value="weekly_flyer">Send me the weekly flyer</label>
-			</div>
-			<div class="form-group">
-				<input type="submit" name="action" value="Register" /> 
+				<input type="submit" name="action" value="Register" />
 				<a href='/Person/'>Cancel</a>
 			</div>
 		</form>

@@ -15,7 +15,7 @@
 			</div>
 
 			<div class="form-group">
-				<input type="submit" name="action" value="Update" /> 
+				<input type="submit" name="action" value="Update" />
 				<a href='/User/login'>Cancel</a>
 			</div>
 		</form>

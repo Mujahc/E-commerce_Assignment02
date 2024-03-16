@@ -55,9 +55,9 @@ class User extends \app\core\Controller{
 			//insert the user
 			$user->insert();
 			//redirect to a good place
-			header('location:/User/login');
+			header('location:/Profile/create');
 		}else{
-			$this->view('User/registration');
+			$this->view('User/register');
 		}
 	}
 

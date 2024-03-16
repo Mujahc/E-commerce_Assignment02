@@ -16,7 +16,7 @@ $this->addRoute('Profile/index' , 'Profile,index');
 $this->addRoute('Profile/create' , 'Profile,create');
 $this->addRoute('Profile/modify' , 'Profile,modify');
 $this->addRoute('Profile/delete' , 'Profile,delete');
-$this->addRoute('Friend/add/{id1}/{id2}','Friend,add');
+//$this->addRoute('Friend/add/{id1}/{id2}','Friend,add');
 
 $this->addRoute('Example/index' , 'Example,index');
 $this->addRoute('Example/clock','Example,clock');
