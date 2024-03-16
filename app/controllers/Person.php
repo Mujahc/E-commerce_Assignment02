@@ -1,101 +1,80 @@
 <?php
 namespace app\controllers;
 
+use stdClass;
+
 class Person extends \app\core\Controller{
-	
-	function login(){
-		//show the login form and log the user in
-		if($_SERVER['REQUEST_METHOD'] === 'POST'){
-			//log the user in... if the password is right
-			//get the user from the database
-			$username = $_POST['username'];
-			$user = new \app\models\Person();
-			$user = $user->get($username);
-			//check the password against the hash
-			$password = $_POST['password'];
-			if($user && $user->active && password_verify($password, $user->password_hash)){
-				//remember that this is the user logging in...
-				$_SESSION['user_id'] = $user->user_id;
 
-				header('location:/Person/securePlace');
-			}else{
-				header('location:/Person/login');
-			}
-		}else{
-			$this->view('Person/login');
-		}
-	}
-
-	function logout(){
-		//session_destroy();
-		//$_SESSION['user_id'] = null;
-
-		session_destroy();
-
-		header('location:/User/login');
-	}
-
-	function securePlace(){
-		if(!isset($_SESSION['user_id'])){
-			header('location:/User/login');
-			return;
-		}
-		echo 'You are safe. You are in a secure location.';
+	function list(){
+		$people = \app\models\Person::getAll();
+		$this->view('Person/list',$people);
 	}
 
 	function register(){
-		//display the form and process the registration
-		if($_SERVER['REQUEST_METHOD'] === 'POST'){
-			//getting the user input and place it in an object
-			//create the new User
-			$user = new \app\models\Person();
-			//populate the User
-			$user->username = $_POST['username'];
-			$user->password_hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
-			//insert the user
-			$user->insert();
-			//redirect to a good place
-			header('location:/Person/login');
-		}else{
-			$this->view('Person/register');
-		}
+		//showing the register view
+		$this->view('Person/register');
 	}
 
-	//update our own user record (only if I am logged in)
-	function update(){
-		if(!isset($_SESSION['user_id'])){
-			header('location:/User/login');
-			return;
-		}
+	function complete_registration(){
+		print_r($_POST);
 
-		$user = new \app\models\Person();
-		$user = $user->getById($_SESSION['user_id']);
+		//call a view to show the submitted data
+		//collect the data
+		//declare a person object
+		$person = new \app\models\Person();
+		//populate the properties
+		$person->first_name = $_POST['first_name'];
+		$person->last_name = $_POST['last_name'];
+		$person->email = $_POST['email'];
+		$publications = $_POST['publications'] ?? [];
+		$person->weekly_flyer = in_array('weekly_flyer', $publications);
+		$person->mailing_list = in_array('mailing_list', $publications);
+		//$person->mailing_list = $_POST['mailing_list'] ?? 'unselected';//null coalescing to avoid warnings when no option of a radio button is selected
+		//hypothetically insert into a database
+		$person->insert(); //add the person to the data file
+		//show the feedback view to confirm with the user
+		//$this->view('Person/complete_registration',$person);
 
-		if($_SERVER['REQUEST_METHOD'] === 'POST'){
-			//process the update
-			$user->username = $_POST['username'];
-			//change the password only if one is sent
-			$password = $_POST['password'];
-			if(!empty($password)){//should be false if ''
-				$user->password_hash = password_hash($password, PASSWORD_DEFAULT);
-			}//otherwise remains as it was
-			$user->update();
-			header('location:/User/update');
-		}else{
-			$this->view('User/update', $user);
-		}
+		//redirect the user back to the list
+		header('location:/Person/');
 	}
 
 	function delete(){
-		if(!isset($_SESSION['user_id'])){//is not logged in
-			header('location:/User/login');
-			return;
-		}
-
-		$user = new \app\models\Person();
-		$user = $user->getById($_SESSION['user_id']);
-		$user->delete();
-		header('location:/User/logout');
+		// get the ID of the record to delete
+		$id = $_GET['id'];
+		// call the deletion on Person
+		\app\models\Person::delete($id);
+		//redirect the user to the updated list
+		header('location:/Person/');
 	}
 
+	//get the relevant record and display it in a form to allow a user to modify the information
+	// URL like http://localhost/Person/edit?id=0
+	function edit(){
+		// get the ID of the record to edit
+		$id = $_GET['id'];
+		//get that record
+		$person = \app\models\Person::get($id);
+		//get the updated information from the user...
+		$this->view('Person/edit',$person);
+	}
+
+	//update the record from the information given by the user
+	function update(){
+		//get the id
+		$id = $_GET['id'];
+		//get the record
+		$person = \app\models\Person::get($id);
+		//change the record fields (same as populating the data before insert)
+		$person->first_name = $_POST['first_name'];
+		$person->last_name = $_POST['last_name'];
+		$person->email = $_POST['email'];
+		$publications = $_POST['publications'] ?? [];
+		$person->weekly_flyer = in_array('weekly_flyer', $publications);
+		$person->mailing_list = in_array('mailing_list', $publications);
+		//update the record in storage
+		$person->update();
+		//redirect to the list
+		header('location:/Person/');
+	}
 }

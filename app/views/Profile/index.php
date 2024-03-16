@@ -6,19 +6,15 @@
 </head>
 <body>
 	<div class='container'>
-		<form method='post' action=''>
-			<div class="form-group">
-				<label>Username:<input type="text" class="form-control" name="username" placeholder="Jon" /></label>
-			</div>
-			<div class="form-group">
-				<label>Password:<input type="password" class="form-control" name="password" placeholder="password" /></label>
-			</div>
-
-			<div class="form-group">
-				<input type="submit" name="action" value="Login" />
-				<a href='/Person/register'>I have no account, bring me to the registration page</a>
-			</div>
-		</form>
+		<h1>User profile</h1>
+		<dl>
+		<dt>First name:</dt>
+		<dd><?= $data->first_name ?></dd>
+		<dt>Last name:</dt>
+		<dd><?= $data->last_name ?></dd>
+		</dl>
+		<a href='/Profile/modify'>Modify my profile</a> | 
+		<a href='/Profile/delete'>Delete my profile</a>
 	</div>
 </body>
 </html>

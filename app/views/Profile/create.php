@@ -6,7 +6,7 @@
 </head>
 <body>
 	<div class='container'>
-		<form method='post' action='/Person/complete_registration'>
+		<form method='post' action=''>
 			<div class="form-group">
 				<label>First name:<input type="text" class="form-control" name="first_name" placeholder="Jon" /></label>
 			</div>
@@ -14,17 +14,8 @@
 				<label>Last name:<input type="text" class="form-control" name="last_name" placeholder="Doe" /></label>
 			</div>
 			<div class="form-group">
-				<label>Email address:<input type="email" class="form-control" name="email" placeholder="jondoe@email.com" /></label>
-			</div>
-			<div class="form-group">
-					<label><input type="checkbox" name="publications[]" value="mailing_list">Include me on the mailing list</label>
-			</div>
-			<div class="form-group">
-				<label><input type="checkbox" name="publications[]" value="weekly_flyer">Send me the weekly flyer</label>
-			</div>
-			<div class="form-group">
-				<input type="submit" name="action" value="Register" /> 
-				<a href='/Person/'>Cancel</a>
+				<input type="submit" name="action" value="Record my profile" /> 
+				<a href='/Profile/index'>Cancel</a> (should not be here)
 			</div>
 		</form>
 	</div>
