@@ -60,7 +60,7 @@ class Person{
 				fwrite($file_handle, $data . "\n");//place a single record on each line
 			}
 			$counter++;//next record
-		}		
+		}
 		flock($file_handle, LOCK_UN);
 		fclose($file_handle);
 
@@ -99,7 +99,7 @@ class Person{
 				fwrite($file_handle, $file_contents[$counter]);
 			}//else it is skipped
 			$counter++;//next record
-		}		
+		}
 		flock($file_handle, LOCK_UN);
 		fclose($file_handle);
 	}
