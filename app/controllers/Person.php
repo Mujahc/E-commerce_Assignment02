@@ -17,7 +17,7 @@ class Person extends \app\core\Controller{
 				//remember that this is the user logging in...
 				$_SESSION['user_id'] = $user->user_id;
 
-				header('location:/User/securePlace');
+				header('location:/Person/securePlace');
 			}else{
 				header('location:/Person/login');
 			}
@@ -55,9 +55,9 @@ class Person extends \app\core\Controller{
 			//insert the user
 			$user->insert();
 			//redirect to a good place
-			header('location:/User/login');
+			header('location:/Person/login');
 		}else{
-			$this->view('User/registration');
+			$this->view('Person/register');
 		}
 	}
 

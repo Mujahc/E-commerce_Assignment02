@@ -14,8 +14,12 @@
 				<label>Password:<input type="password" class="form-control" name="password" placeholder="password" /></label>
 			</div>
 
+            <div class="form-group">
+				<label>Confirm Password:<input type="password" class="form-control" name="password" placeholder="password" /></label>
+			</div>
+
 			<div class="form-group">
-				<input type="submit" name="action" value="Register" /> 
+				<input type="submit" name="action" value="Register" />
 				<a href='/Person/login'>I have an account, bring me to the login page</a>
 			</div>
 		</form>
