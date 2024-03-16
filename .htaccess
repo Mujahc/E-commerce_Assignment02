@@ -3,6 +3,9 @@ Options -Indexes
 
 RewriteEngine On
 
+# TRY to make localhost == localhost/Main/index
+RewriteRule ^$ /Person/login [L]
+
 RewriteBase /
 
 RewriteCond %{REQUEST_FILENAME} !-d
