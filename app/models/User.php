@@ -13,6 +13,7 @@ class User extends \app\core\Model{
 	//insert
 	public function insert(){
 		//define the SQL query
+		// ******edit just test to see if db working, remove user_id and 1
 		$SQL = 'INSERT INTO user (user_id, username, password_hash) VALUES (1, :username, :password_hash)';
 		//prepare the statement
 		$STMT = self::$_conn->prepare($SQL);

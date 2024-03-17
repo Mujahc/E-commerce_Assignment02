@@ -3,8 +3,8 @@ Options -Indexes
 
 RewriteEngine On
 
-# TRY to make localhost == localhost/Main/index
-RewriteRule ^$ /User/login [L]
+# # TRY to make localhost == localhost/Main/index
+# RewriteRule ^$ /User/login [L]
 
 RewriteBase /
 

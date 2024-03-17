@@ -23,7 +23,7 @@ SET time_zone = "+00:00";
 CREATE DATABASE IF NOT EXISTS `ecommerce` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `ecommerce`;
 
--- --------------------------------------------------------
+-- -----------------------------------------------------------------------------
 
 --
 -- Table structure for table `profile`
@@ -45,8 +45,8 @@ CREATE TABLE `profile` (
 INSERT INTO `profile` (`profile_id`, `user_id`, `first_name`, `middle_name` , `last_name`) VALUES
 (3, 1, 'Mister', 'Grand', 'Blue');
 
--- --------------------------------------------------------
-
+-- -----------------------------------------------------------------------------
+-- TABLE START
 --
 -- Table structure for table `user`
 --
@@ -59,14 +59,10 @@ CREATE TABLE `user` (
   `active` tinyint(4) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `user`
---
-
 INSERT INTO `user` (`user_id`, `username`, `password_hash`, `active`) VALUES
 (1, 'Tarzan', '$2y$10$.c/0uj/ezTONgPUYzD/8auuOtxC.pllo8LOotHZVecYKP3XV3EmgK', 1);
 
--- --------------------------------------------------------
+-- -----------------------------------------------------------------------------
 
 --
 -- Table structure for table `publication`
@@ -82,9 +78,7 @@ CREATE TABLE `publication` (
   `publication_status` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
--- --------------------------------------------------------
+-- -----------------------------------------------------------------------------
 
 --
 -- Table structure for table `publication_comment`
@@ -99,11 +93,8 @@ CREATE TABLE `publication_comment` (
   `timestamp` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
---
--- Indexes for dumped tables
---
+-- TABLE END
+-- ---------------------------------------------------------------------------------------------------------------------
 
 --
 -- Indexes for table `profile`
@@ -120,8 +111,21 @@ ALTER TABLE `user`
   ADD UNIQUE KEY `username` (`username`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- Indexes for table `publication`
 --
+ALTER TABLE `publication`
+  ADD PRIMARY KEY (`publication_id`),
+  ADD KEY `profile_id` (`profile_id`);
+
+--
+-- Indexes for table `publication_comment`
+--
+ALTER TABLE `publication_comment`
+  ADD PRIMARY KEY (`publication_comment_id`),
+  ADD KEY `profile_id` (`profile_id`),
+  ADD KEY `publication_id` (`publication_id`);
+
+-- -----------------------------------------------------------------------------
 
 --
 -- AUTO_INCREMENT for table `profile`
@@ -133,17 +137,45 @@ ALTER TABLE `profile`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- Constraints for dumped tables
+-- AUTO_INCREMENT for table `publication`
 --
+ALTER TABLE `publication`
+  MODIFY `publication_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `publication_comment`
+--
+ALTER TABLE `publication_comment`
+  MODIFY `publication_comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+-- -----------------------------------------------------------------------------
 
 --
 -- Constraints for table `profile`
 --
 ALTER TABLE `profile`
   ADD CONSTRAINT `profile_to_user` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+COMMIT;
+
+--
+-- Constraints for table `publication`
+--
+ALTER TABLE `publication`
+  ADD CONSTRAINT `publication_to_profile` FOREIGN KEY (`profile_id`) REFERENCES `profile` (`profile_id`);
+COMMIT;
+
+--
+-- Constraints for table `publication_comment`
+--
+ALTER TABLE `publication_comment`
+  ADD CONSTRAINT `publication_comment_to_profile` FOREIGN KEY (`profile_id`) REFERENCES `profile` (`profile_id`);
+COMMIT;
+
+ALTER TABLE `publication_comment`
+  ADD CONSTRAINT `publication_comment_to_publication` FOREIGN KEY (`publication_id`) REFERENCES `publication` (`publication_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
