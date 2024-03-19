@@ -10,7 +10,7 @@ class Model{
 	//$this is the reference of an object
 	public function __construct(){
 		$host = 'localhost';
-		$dbname = 'ecommerce';
+		$dbname = 'ecom_ass02';
 		$user = 'root';
 		$pass = '';
 		try { # MySQL with PDO_MYSQL

@@ -22,3 +22,9 @@ $this->addRoute('Example/index' , 'Example,index');
 $this->addRoute('Example/clock','Example,clock');
 $this->addRoute('Example/passingData','Example,passingData');
 $this->addRoute('Example/count','Example,count');
+
+// Publication Routes
+$this->addRoute('Publication/index', 'Publication,index');
+$this->addRoute('Publication/create', 'Publication,create');
+$this->addRoute('Publication/modify/{publication_id}', 'Publication,modify');
+$this->addRoute('Publication/delete/{publication_id}', 'Publication,delete');
