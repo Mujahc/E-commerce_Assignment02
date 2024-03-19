@@ -11,7 +11,7 @@ class HasProfile implements \app\core\AccessFilter{
 		if($profile){
 			return false;
 		}else{
-			header('location:/Publication/index');
+			header('location:/Profile/create');
 			return true;
 		}
 	}

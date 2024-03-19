@@ -2,6 +2,7 @@
 namespace app\core;
 
 use PDO;
+
 use PDOException;
 
 class Model{

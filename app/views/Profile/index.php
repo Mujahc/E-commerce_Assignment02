@@ -17,6 +17,7 @@
 		</dl>
 		<a href='/Profile/modify'>Modify my profile</a>
 		<a href='/Profile/delete'>Delete my profile</a>
+		<a href='/Publication/index'>View My Publications</a>
 	</div>
 </body>
 </html>
