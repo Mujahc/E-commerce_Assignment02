@@ -15,9 +15,9 @@
 		<dt>Last name:</dt>
 		<dd><?= $data->last_name ?></dd>
 		</dl>
-		<a href='/Profile/modify'>Modify my profile</a>
-		<a href='/Profile/delete'>Delete my profile</a>
-		<a href='/Publication/index'>View My Publications</a>
+		<a href='/Profile/modify'>Modify my profile</a> <br>
+		<a href='/Profile/delete'>Delete my profile</a> <br>
+		<a href='/Publication/index'>View My Publications</a> <br>
 	</div>
 </body>
 </html>
