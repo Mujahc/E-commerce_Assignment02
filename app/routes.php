@@ -25,11 +25,5 @@ $this->addRoute('PublicationComment/add', 'PublicationComment,add');
 // $this->addRoute('PublicationComment/modify/{comment_id}', 'PublicationComment,modify');
 // $this->addRoute('PublicationComment/delete/{comment_id}', 'PublicationComment,delete');
 
-// Example Routes
-$this->addRoute('Example/index', 'Example,index');
-$this->addRoute('Example/clock', 'Example,clock');
-$this->addRoute('Example/passingData', 'Example,passingData');
-$this->addRoute('Example/count', 'Example,count');
-
 // Setting the publication index as the landing page
 $this->addRoute('/', 'Publication,index');
