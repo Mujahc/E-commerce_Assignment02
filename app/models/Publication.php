@@ -70,10 +70,22 @@ class Publication extends \app\core\Model {
         return $STMT->fetch();
     }
 
+    // For public or visitors
     public function searchPublications($searchTerm) {
         $SQL = "SELECT * FROM publication WHERE publication_status = 'public' AND (publication_title LIKE :searchTerm)";
         $STMT = self::$_conn->prepare($SQL);
         $STMT->execute(['searchTerm' => '%' . $searchTerm . '%']);
+        return $STMT->fetchAll(PDO::FETCH_CLASS, 'app\models\Publication');
+    }
+
+    // For private or logged in users
+    public function searchUserPublications($searchTerm, $profileId) {
+        $SQL = "SELECT * FROM publication WHERE profile_id = :profile_id AND (publication_title LIKE :searchTerm OR publication_text LIKE :searchTerm) ORDER BY timestamp DESC";
+        $STMT = self::$_conn->prepare($SQL);
+        $STMT->execute([
+            'profile_id' => $profileId,
+            'searchTerm' => '%' . $searchTerm . '%'
+        ]);
         return $STMT->fetchAll(PDO::FETCH_CLASS, 'app\models\Publication');
     }
 }

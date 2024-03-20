@@ -14,6 +14,7 @@
                 <li class="nav-item"><a href="/User/login" class="nav-link">Login</a></li>
                 <li class="nav-item"><a href="/Profile/index" class="nav-link">My Profile</a></li>
                 <li class="nav-item"><a href="/Publication/create" class="nav-link">Create Publication</a></li>
+                <li class="nav-item"><a href="/Publication/index" class="nav-link">My Publication/s</a></li>
             </ul>
         </nav>
         <div class="mt-4">

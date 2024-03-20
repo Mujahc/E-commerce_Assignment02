@@ -9,6 +9,14 @@
 <body>
 <div class="container">
         <h1>Edit Publication</h1>
+        <nav>
+            <ul class="nav">
+                <li class="nav-item"><a href="/User/login" class="nav-link">Login</a></li>
+                <li class="nav-item"><a href="/Profile/index" class="nav-link">My Profile</a></li>
+                <li class="nav-item"><a href="/Publication/create" class="nav-link">Create Publication</a></li>
+                <li class="nav-item"><a href="/Publication/index" class="nav-link">My Publication/s</a></li>
+            </ul>
+        </nav>
         <form action="/Publication/modify/<?= $publication->publication_id ?>" method="post">
             <div>
                 <label for="publication_title">Title:</label>
@@ -16,7 +24,7 @@
             </div>
             <div>
                 <label for="publication_text">Text:</label>
-                <textarea id="publication_text" name="publication_text" required><?= htmlspecialchars($publication->publication_text) ?></textarea>
+                <textarea id="publication_text" name="publication_text" style="width: 70%;" required><?= htmlspecialchars($publication->publication_text) ?> </textarea>
             </div>
             <div>
                 <label for="publication_status">Status:</label>

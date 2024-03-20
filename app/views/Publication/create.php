@@ -8,7 +8,15 @@
 </head>
 <body>
 <div class="container">
-        <h1>Create a New Publication</h1>
+        <h1>Create Publication</h1>
+        <nav>
+            <ul class="nav">
+                <li class="nav-item"><a href="/User/login" class="nav-link">Login</a></li>
+                <li class="nav-item"><a href="/Profile/index" class="nav-link">My Profile</a></li>
+                <li class="nav-item"><a href="/Publication/create" class="nav-link">Create Publication</a></li>
+                <li class="nav-item"><a href="/Publication/index" class="nav-link">My Publication/s</a></li>
+            </ul>
+        </nav>
         <form action="/Publication/create" method="post">
             <div>
                 <label for="publication_title">Title:</label>
@@ -16,7 +24,7 @@
             </div>
             <div>
                 <label for="publication_text">Text:</label>
-                <textarea id="publication_text" name="publication_text" required></textarea>
+                <textarea id="publication_text" name="publication_text" rows="3" style="width: 70%;" required></textarea>
             </div>
             <div>
                 <label for="publication_status">Status:</label>

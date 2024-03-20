@@ -7,19 +7,33 @@ class Publication extends \app\core\Controller {
 
     // Display all public publications or a user's own publications
     public function index() {
-        $publication = new \app\models\Publication();
+        $publicationModel = new \app\models\Publication();
         $searchTerm = isset($_GET['search']) ? $_GET['search'] : '';
+        $publications = [];
     
-        if ($searchTerm) {
-            $publications = $publication->searchPublications($searchTerm);
+        // Check if a user is logged in and has a profile
+        if (isset($_SESSION['profile_id'])) {
+            if ($searchTerm) {
+                // If there is a search term, filter the user's publications by the search term
+                $publications = $publicationModel->searchUserPublications($searchTerm, $_SESSION['profile_id']);
+            } else {
+                // No search term, get all the user's publications
+                $publications = $publicationModel->getByProfile($_SESSION['profile_id']);
+            }
         } else {
-            $publications = $publication->getAllPublic();
+            if ($searchTerm) {
+                // If there is a search term, filter the public publications by the search term
+                $publications = $publicationModel->searchPublications($searchTerm);
+            } else {
+                // No search term, get all public publications
+                $publications = $publicationModel->getAllPublic();
+            }
         }
     
         $this->view('Publication/index', ['publications' => $publications]);
     }
     
-
+    
     // Create a new publication
     public function create() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
