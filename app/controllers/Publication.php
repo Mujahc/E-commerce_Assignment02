@@ -27,7 +27,7 @@ class Publication extends \app\core\Controller {
             
             // Check if profile_id exists in the session
             if (!isset($_SESSION['profile_id'])) {
-                // Handle the error, maybe redirect to login or profile creation
+                // Handle the error, redirect to login or profile creation
                 header('Location: /User/login');
                 exit;
             }
@@ -46,18 +46,21 @@ class Publication extends \app\core\Controller {
 
     // Modify an existing publication
     public function modify($publication_id) {
-        $publication = new \app\models\Publication();
-        $existingPublication = $publication->getById($publication_id); // Assuming a getById method exists
+        $publicationModel = new \app\models\Publication();
+        // Fetch the publication based on the provided ID
+        $publication = $publicationModel->getById($publication_id);
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $existingPublication->publication_title = $_POST['publication_title'];
-            $existingPublication->publication_text = $_POST['publication_text'];
-            $existingPublication->publication_status = $_POST['publication_status'];
-            
-            $existingPublication->update();
-            header('location:/Publication/index');
+            // Update the publication with new values from the form
+            $publication->publication_title = $_POST['publication_title'];
+            $publication->publication_text = $_POST['publication_text'];
+            $publication->publication_status = $_POST['publication_status'];
+            $publication->update();
+
+            header('Location: /Publication/index');
         } else {
-            $this->view('Publication/modify', $existingPublication);
+            // Pass the publication to the modify view
+            $this->view('Publication/modify', ['publication' => $publication]);
         }
     }
 

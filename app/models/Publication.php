@@ -63,10 +63,10 @@ class Publication extends \app\core\Model {
 
     // Get a specific publication by ID
     public function getById($publication_id) {
-        $SQL = 'SELECT * FROM publication WHERE publication_id = :publication_id';
+        $SQL = "SELECT * FROM publication WHERE publication_id = :publication_id";
         $STMT = self::$_conn->prepare($SQL);
         $STMT->execute(['publication_id' => $publication_id]);
-        $STMT->setFetchMode(PDO::FETCH_CLASS, 'app\models\Publication');
+        $STMT->setFetchMode(PDO::FETCH_CLASS, self::class);
         return $STMT->fetch();
     }
 
