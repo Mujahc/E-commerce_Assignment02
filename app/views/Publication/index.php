@@ -12,13 +12,13 @@
         <a href="/Publication/index">My Publication/s</a>
         <p>This is the index of the Main controller. This is where you see publications</p>
         <div class="publicationsClass">Publication 01</div>
-        <div class="publicationsClass">Publication 01</div>
-        <div class="publicationsClass">Publication 01</div>
-        <div class="publicationsClass">Publication 01</div>
-        <div class="publicationsClass">Publication 01</div>
-        <div class="publicationsClass">Publication 01</div>
-        <div class="publicationsClass">Publication 01</div>
-        <div class="publicationsClass">Publication 01</div>
+        <div class="publicationsClass">Publication 02</div>
+        <div class="publicationsClass">Publication 03</div>
+        <div class="publicationsClass">Publication 04</div>
+        <div class="publicationsClass">Publication 05</div>
+        <div class="publicationsClass">Publication 06</div>
+        <div class="publicationsClass">Publication 07</div>
+        <div class="publicationsClass">Publication 08</div>
     </div>
 </body>
 </html>

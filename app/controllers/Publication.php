@@ -9,7 +9,6 @@ class Publication extends \app\core\Controller {
     public function index() {
         $publication = new \app\models\Publication();
         
-        // Adjusted to use the global $_GET variable
         $viewOwn = isset($_GET['view']) && $_GET['view'] == 'own';
     
         if ($viewOwn) {

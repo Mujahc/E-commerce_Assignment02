@@ -61,6 +61,7 @@ class Publication extends \app\core\Model {
         $STMT->execute(['publication_id' => $this->publication_id]);
     }
 
+    // Get a specific publication by ID
     public function getById($publication_id) {
         $SQL = 'SELECT * FROM publication WHERE publication_id = :publication_id';
         $STMT = self::$_conn->prepare($SQL);
