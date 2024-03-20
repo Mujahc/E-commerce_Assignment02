@@ -40,6 +40,13 @@
                 <div class="card mb-2">
                     <div class="card-body">
                         <?= htmlspecialchars($comment->comment_text) ?>
+                        <!-- Only show edit and delete buttons if the comment belongs to the logged-in user -->
+                        <?php if ($comment->profile_id == $_SESSION['profile_id']): ?>
+                            <div>
+                                <a href="/PublicationComment/modify/<?= $comment->publication_comment_id ?>" class="btn btn-secondary btn-sm">Edit</a>
+                                <a href="/PublicationComment/delete/<?= $comment->publication_comment_id ?>" class="btn btn-danger btn-sm">Delete</a>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
             <?php endforeach; ?>
