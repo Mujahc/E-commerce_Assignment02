@@ -2,23 +2,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title><?= $name ?> view</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </head>
 <body>
-    <h1>Publication View Index Page</h1>
     <div class="container">
-        <a href="/User/login">Login</a>
-        <a href="/Profile/index">My Profile</a>
-        <a href="/Publication/index">My Publication/s</a>
-        <p>This is the index of the Main controller. This is where you see publications</p>
-        <div class="publicationsClass">Publication 01</div>
-        <div class="publicationsClass">Publication 02</div>
-        <div class="publicationsClass">Publication 03</div>
-        <div class="publicationsClass">Publication 04</div>
-        <div class="publicationsClass">Publication 05</div>
-        <div class="publicationsClass">Publication 06</div>
-        <div class="publicationsClass">Publication 07</div>
-        <div class="publicationsClass">Publication 08</div>
+        <h1>Publication View Index Page</h1>
+        <nav>
+            <ul>
+                <li><a href="/User/login">Login</a></li>
+                <li><a href="/Profile/index">My Profile</a></li>
+                <li><a href="/Publication/create">Create Publication</a></li>
+            </ul>
+        </nav>
+        <form method="get" action="/Publication/index">
+            <input type="text" name="search" placeholder="Search publications by title..." />
+            <button type="submit">Search</button>
+        </form>
+        <?php foreach ($publications as $publication): ?>
+            <div class="publicationsClass">
+                <h3><?= htmlspecialchars($publication->publication_title) ?></h3>
+                <p><?= htmlspecialchars($publication->publication_text) ?></p>
+                <small>Published: <?= $publication->timestamp ?> | Status: <?= ucfirst($publication->publication_status) ?></small>
+                <?php if ($publication->profile_id == $_SESSION['profile_id']): ?>
+                    <div><a href="/Publication/modify/<?= $publication->publication_id ?>">Edit</a> | <a href="/Publication/delete/<?= $publication->publication_id ?>">Delete</a></div>
+                <?php endif; ?>
+            </div>
+        <?php endforeach; ?>
     </div>
 </body>
 </html>

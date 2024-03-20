@@ -69,4 +69,11 @@ class Publication extends \app\core\Model {
         $STMT->setFetchMode(PDO::FETCH_CLASS, 'app\models\Publication');
         return $STMT->fetch();
     }
+
+    public function searchPublications($searchTerm) {
+        $SQL = "SELECT * FROM publication WHERE publication_status = 'public' AND (publication_title LIKE :searchTerm)";
+        $STMT = self::$_conn->prepare($SQL);
+        $STMT->execute(['searchTerm' => '%' . $searchTerm . '%']);
+        return $STMT->fetchAll(PDO::FETCH_CLASS, 'app\models\Publication');
+    }
 }

@@ -1,72 +1,77 @@
 <?php
 namespace app\controllers;
 
-//applying the Login condition to the whole class
+// Applying the Login condition to the whole class
 #[\app\filters\Login]
-class Profile extends \app\core\Controller{
+class Profile extends \app\core\Controller {
 
-	#[\app\filters\HasProfile]
-	public function index(){
-		$profile = new \app\models\Profile();
-		$profile = $profile->getForUser($_SESSION['user_id']);
+    #[\app\filters\HasProfile]
+    public function index() {
+        // Fetch the profile for the logged-in user
+        $profileModel = new \app\models\Profile();
+        $profile = $profileModel->getForUser($_SESSION['user_id']);
 
-		//redirect a user that has no profile to the profile creation URL
-		$this->view('Profile/index',$profile);
-	}
+        // Display the user's profile page
+        $this->view('Profile/index', $profile);
+    }
 
-	public function create(){
-		if($_SERVER['REQUEST_METHOD'] === 'POST'){//data is submitted through method POST
-			//make a new profile object
+    public function create() {
+		if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 			$profile = new \app\models\Profile();
-			//populate it
+			// Populate and insert the profile
 			$profile->user_id = $_SESSION['user_id'];
 			$profile->first_name = $_POST['first_name'];
 			$profile->middle_name = $_POST['middle_name'];
 			$profile->last_name = $_POST['last_name'];
-			//insert it
 			$profile->insert();
-			//redirect
+	
+			// No need for getLastInsertedId() if $profile->insert() already updates $profile->profile_id
+			$_SESSION['profile_id'] = $profile->profile_id;
+	
 			header('location:/Profile/index');
-		}else{
+		} else {
 			$this->view('Profile/create');
 		}
 	}
+	
 
-	public function modify(){
-		$profile = new \app\models\Profile();
-		$profile = $profile->getForUser($_SESSION['user_id']);
+    public function modify() {
+        $profileModel = new \app\models\Profile();
+        $profile = $profileModel->getForUser($_SESSION['user_id']);
 
-		if($_SERVER['REQUEST_METHOD'] === 'POST'){//data is submitted through method POST
-			//make a new profile object
-			//populate it
-			$profile->first_name = $_POST['first_name'];
-			$profile->middle_name = $_POST['middle_name'];
-			$profile->last_name = $_POST['last_name'];
-			//update it
-			$profile->update();
-			//redirect
-			header('location:/Profile/index');
-		}else{
-			$this->view('Profile/modify', $profile);
-		}
-	}
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Update the profile with the new data from the form
+            $profile->first_name = $_POST['first_name'];
+            $profile->middle_name = $_POST['middle_name'];
+            $profile->last_name = $_POST['last_name'];
 
-	public function delete(){
-		//present the user with a form to confirm the deletion that is requested and delete if the form is submitted
-/*		//make sure that the user is logged in
-		if(!isset($_SESSION['user_id'])){
-			header('location:/User/login');
-			return;
-		}
-*/
-		$profile = new \app\models\Profile();
-		$profile = $profile->getForUser($_SESSION['user_id']);
+            // Perform the update operation in the database
+            $profile->update();
 
-		if($_SERVER['REQUEST_METHOD'] === 'POST'){
-			$profile->delete();
-			header('location:/Profile/index');
-		}else{
-			$this->view('Profile/delete',$profile);
-		}
-	}
+            // Redirect to the profile index page
+            header('location:/Profile/index');
+        } else {
+            // Display the profile modification form with existing data
+            $this->view('Profile/modify', $profile);
+        }
+    }
+
+    public function delete() {
+        $profileModel = new \app\models\Profile();
+        $profile = $profileModel->getForUser($_SESSION['user_id']);
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Delete the user's profile
+            $profile->delete();
+
+            // Consider clearing the profile-related session data if necessary
+            unset($_SESSION['profile_id']);
+
+            // Redirect after deletion
+            header('location:/Profile/index');
+        } else {
+            // Display the profile deletion confirmation page
+            $this->view('Profile/delete', $profile);
+        }
+    }
 }

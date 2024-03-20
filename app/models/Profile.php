@@ -13,16 +13,26 @@ class Profile extends \app\core\Model{
 	//CRUD
 
 	//create
-	public function insert(){
-		$SQL = 'INSERT INTO profile(user_id, first_name, middle_name, last_name) VALUE (:user_id, :first_name, :middle_name, :last_name)';
-		$STMT = self::$_conn->prepare($SQL);
-		$STMT->execute(
-			['user_id'=>$this->user_id,
-			'first_name'=>$this->first_name,
-			'middle_name'=>$this->middle_name,
-			'last_name'=>$this->last_name]
-		);
-	}
+	// Method to insert a new profile record
+    public function insert() {
+        $SQL = 'INSERT INTO profile (user_id, first_name, middle_name, last_name) VALUES (:user_id, :first_name, :middle_name, :last_name)';
+        $STMT = self::$_conn->prepare($SQL);
+        $STMT->execute([
+            ':user_id' => $this->user_id,
+            ':first_name' => $this->first_name,
+            ':middle_name' => $this->middle_name,
+            ':last_name' => $this->last_name,
+        ]);
+
+        // Assuming you're using an auto-increment ID for profiles
+        // This sets the last inserted ID to the model's profile_id property
+        $this->profile_id = self::$_conn->lastInsertId();
+    }
+    
+    // Optionally, if you need to fetch this ID outside after calling insert
+    public function getLastInsertedId() {
+        return $this->profile_id;
+    }
 
 	//read
 	public function getForUser($user_id){
