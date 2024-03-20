@@ -75,4 +75,21 @@ class Publication extends \app\core\Controller {
             $this->view('Publication/delete', ['publication_id' => $publication_id]);
         }
     }
+
+    // Method to display a single publication and its comments
+    public function show($publication_id) {
+        $publicationModel = new \app\models\Publication();
+        $commentModel = new \app\models\PublicationComment();
+
+        // Fetch the publication
+        $publication = $publicationModel->getById($publication_id);
+        // Fetch comments for the publication
+        $comments = $commentModel->getByPublicationId($publication_id);
+
+        // Pass both the publication and its comments to the view
+        $this->view('Publication/view', [
+            'publication' => $publication,
+            'comments' => $comments
+        ]);
+    }
 }

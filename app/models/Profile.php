@@ -24,12 +24,11 @@ class Profile extends \app\core\Model{
             ':last_name' => $this->last_name,
         ]);
 
-        // Assuming you're using an auto-increment ID for profiles
         // This sets the last inserted ID to the model's profile_id property
         $this->profile_id = self::$_conn->lastInsertId();
     }
     
-    // Optionally, if you need to fetch this ID outside after calling insert
+    // If you need to fetch this ID outside after calling insert
     public function getLastInsertedId() {
         return $this->profile_id;
     }

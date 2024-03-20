@@ -13,7 +13,6 @@ class User extends \app\core\Controller{
             if ($user && $user->active && password_verify($password, $user->password_hash)) {
                 $_SESSION['user_id'] = $user->user_id;
                 
-                // Assume you have a method in your Profile model to get the profile by user_id
                 $profileModel = new \app\models\Profile();
                 $profile = $profileModel->getForUser($user->user_id);
                 

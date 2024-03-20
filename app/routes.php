@@ -16,10 +16,14 @@ $this->addRoute('Publication/index', 'Publication,index');
 $this->addRoute('Publication/create', 'Publication,create');
 $this->addRoute('Publication/modify/{publication_id}', 'Publication,modify');
 $this->addRoute('Publication/delete/{publication_id}', 'Publication,delete');
-$this->addRoute('Publication/view/{publication_id}', 'Publication,view');
 
-// PublicationComment Routes
+$this->addRoute('Publication/view/{publication_id}', 'Publication,show');
 
+// Publication Comment Routes
+$this->addRoute('PublicationComment/add', 'PublicationComment,add');
+
+// $this->addRoute('PublicationComment/modify/{comment_id}', 'PublicationComment,modify');
+// $this->addRoute('PublicationComment/delete/{comment_id}', 'PublicationComment,delete');
 
 // Example Routes
 $this->addRoute('Example/index', 'Example,index');
