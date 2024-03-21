@@ -18,8 +18,8 @@
 		<a href='/Profile/modify'>Modify my profile</a> <br>
 		<a href='/Profile/delete'>Delete my profile</a> <br>
 		<a href='/Publication/index'>View MY Publications</a> <br>
-		<a href="/Publication/public">View PUBLIC Publication/s</a>
-		<a href="/User/logout">Logout</a>
+		<a href="/Publication/public">View PUBLIC Publication/s</a> <br>
+		<a href="/User/logout">Logout</a> <br>
 	</div>
 </body>
 </html>

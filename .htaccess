@@ -3,8 +3,8 @@ Options -Indexes
 
 RewriteEngine On
 
-# # TRY to make localhost == localhost/Publication/public
-# RewriteRule ^$ /Publication/public [L]
+# TRY to make localhost == localhost/Publication/public
+RewriteRule ^$ /Publication/public [L]
 
 RewriteBase /
 
