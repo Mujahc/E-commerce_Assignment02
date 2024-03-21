@@ -25,6 +25,11 @@
             </div>
             <hr>
             <h2>Public Publications</h2>
+            <!-- Search Form -->
+            <form method="get" action="/Publication/public">
+                <input type="text" name="search" placeholder="Search publications by title..." />
+                <button type="submit">Search</button>
+            </form>
             <?php if (!empty($publications)): ?>
                 <?php foreach ($publications as $publication): ?>
                     <div class="mb-3">

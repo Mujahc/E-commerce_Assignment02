@@ -20,6 +20,10 @@
             </ul>
         </nav>
         <div class="mt-4">
+            <form method="get" action="/Publication/index">
+                <input type="text" name="search" placeholder="Search publications by title..." />
+                <button type="submit">Search</button>
+            </form>
             <?php foreach ($publications as $publication): ?>
                 <div class="mb-3">
                     <h3>

@@ -106,19 +106,27 @@ class Publication extends \app\core\Controller {
         ]);
     }
 
+    // Method to display public publications and their comments, with optional search by title
     public function showPublic() {
         $publicationModel = new \app\models\Publication();
+        $commentModel = new \app\models\PublicationComment();
         $searchTerm = isset($_GET['search']) ? $_GET['search'] : '';
-        $publications = [];
-    
-        if ($searchTerm) {
-            // Filter the public publications by the search term
-            $publications = $publicationModel->searchPublications($searchTerm);
-        } else {
-            // Get all public publications
-            $publications = $publicationModel->getAllPublic();
+
+        // Fetch public publications with an optional search term
+        $publications = $searchTerm ?
+            $publicationModel->searchPublications($searchTerm) :
+            $publicationModel->getAllPublic();
+
+        // Fetch comments for each publication
+        foreach ($publications as $publication) {
+            $publication->comments = $commentModel->getByPublicationId($publication->publication_id);
         }
-    
-        $this->view('Publication/public', ['publications' => $publications]);
+
+        // Render the public view with publications and their comments
+        $this->view('Publication/public', [
+            'publications' => $publications,
+            'searchTerm' => $searchTerm
+        ]);
     }
+
 }
