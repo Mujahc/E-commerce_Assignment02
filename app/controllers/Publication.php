@@ -33,7 +33,6 @@ class Publication extends \app\core\Controller {
         $this->view('Publication/index', ['publications' => $publications]);
     }
     
-    
     // Create a new publication
     public function create() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -120,6 +119,6 @@ class Publication extends \app\core\Controller {
             $publications = $publicationModel->getAllPublic();
         }
     
-        $this->view('Publication/index', ['publications' => $publications]);
+        $this->view('Publication/public', ['publications' => $publications]);
     }
 }
