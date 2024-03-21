@@ -10,11 +10,13 @@
     <div class="container">
         <h1>Delete Comment</h1>
         <p>Are you sure you want to delete this comment?</p>
-        <!-- The action in the form below should point to the route that processes the deletion -->
-        <form action="/PublicationComment/delete/<?= htmlspecialchars($comment->publication_comment_id) ?>" method="post">
-            <input type="hidden" name="publication_id" value="<?= htmlspecialchars($comment->publication_id) ?>">
-            <button type="submit" class="btn btn-danger">Delete</button>
-            <a href="/Publication/view/<?= htmlspecialchars($comment->publication_id) ?>" class="btn btn-secondary">Cancel</a>
+        <form action="/PublicationComment/delete/<?= $comment->publication_comment_id ?>" method="post">
+            <div class="form-group">
+                <label for="comment_text">Comment:</label>
+                <input type="hidden" name="publication_comment_id" value="<?= htmlspecialchars($comment->publication_comment_id) ?>">
+            </div>
+            <button type="submit" class="btn btn-danger">Delete Comment</button>
+            <a href="/Publication/view/<?= $comment->publication_id ?>" class="btn btn-secondary">Cancel</a>
         </form>
     </div>
 </body>

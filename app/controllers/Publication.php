@@ -2,7 +2,7 @@
 namespace app\controllers;
 
 // Apply the Login condition to the whole class
-#[\app\filters\Login]
+
 class Publication extends \app\core\Controller {
 
     // Display all public publications or a user's own publications

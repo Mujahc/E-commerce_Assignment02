@@ -39,20 +39,21 @@ class PublicationComment extends \app\core\Controller {
     public function delete($comment_id) {
         $commentModel = new \app\models\PublicationComment();
         $comment = $commentModel->getById($comment_id);
-
-        // Check if the comment belongs to the logged-in user
+    
         if ($comment && $comment->profile_id == $_SESSION['profile_id']) {
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                // Call the delete method with $comment_id
                 $commentModel->delete($comment_id);
                 header("Location: /Publication/view/{$comment->publication_id}");
-                exit;
+                exit; // Make sure to exit after a header redirect
             } else {
-                $this->view('PublicationComment/delete', ['comment_id' => $comment_id]);
+                // Provide only the necessary information to the view
+                $this->view('PublicationComment/delete', ['comment' => $comment]);
             }
         } else {
             // Handle not found or unauthorized access
             header('Location: /');
-            exit;
+            exit; // Exit here as well after a redirect
         }
     }
 
