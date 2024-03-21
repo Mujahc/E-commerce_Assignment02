@@ -18,6 +18,7 @@ $this->addRoute('Profile/delete', 'Profile,delete');
 
 // Publication Routes
 $this->addRoute('Publication/index', 'Publication,index');
+$this->addRoute('Publication/public', 'Publication,showPublic');
 $this->addRoute('Publication/create', 'Publication,create');
 $this->addRoute('Publication/modify/{publication_id}', 'Publication,modify');
 $this->addRoute('Publication/delete/{publication_id}', 'Publication,delete');
@@ -30,5 +31,5 @@ $this->addRoute('PublicationComment/modify/{comment_id}', 'PublicationComment,mo
 $this->addRoute('PublicationComment/delete/{comment_id}', 'PublicationComment,delete');
 
 
-// Setting the publication index as the landing page
-$this->addRoute('/', 'Publication,index');
+// Setting the publication public as the landing page
+$this->addRoute('/', 'Publication,public');

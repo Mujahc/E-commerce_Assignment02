@@ -106,4 +106,20 @@ class Publication extends \app\core\Controller {
             'comments' => $comments
         ]);
     }
+
+    public function showPublic() {
+        $publicationModel = new \app\models\Publication();
+        $searchTerm = isset($_GET['search']) ? $_GET['search'] : '';
+        $publications = [];
+    
+        if ($searchTerm) {
+            // Filter the public publications by the search term
+            $publications = $publicationModel->searchPublications($searchTerm);
+        } else {
+            // Get all public publications
+            $publications = $publicationModel->getAllPublic();
+        }
+    
+        $this->view('Publication/index', ['publications' => $publications]);
+    }
 }
