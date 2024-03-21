@@ -13,6 +13,7 @@
             <ul class="nav">
                 <li class="nav-item"><a href="/User/login" class="nav-link">Login</a></li>
                 <li class="nav-item"><a href="/Profile/index" class="nav-link">My Profile</a></li>
+                <li class="nav-item"><a href="/Publication/index" class="nav-link">My Publication/s</a></li>
                 <li class="nav-item"><a href="/User/logout" class="nav-link">Logout</a></li>
             </ul>
         </nav>
