@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `ecom_ass02`
 --
+CREATE DATABASE IF NOT EXISTS `ecom_ass02` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `ecom_ass02`;
 
 -- --------------------------------------------------------
 
