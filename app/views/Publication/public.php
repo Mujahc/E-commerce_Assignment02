@@ -34,7 +34,12 @@
             <?php if (!empty($publications)): ?>
                 <?php foreach ($publications as $publication): ?>
                     <div class="mb-3">
-                        <h3><?= htmlspecialchars($publication->publication_title) ?></h3>
+                        <h3>
+                            <!-- Link to the publication detail view -->
+                            <a href="/Publication/view/<?= $publication->publication_id ?>">
+                                <?= htmlspecialchars($publication->publication_title) ?>
+                            </a>
+                        </h3>
                         <p><?= nl2br(htmlspecialchars($publication->publication_text)) ?></p>
                         <small>Published: <?= $publication->timestamp ?></small>
                     </div>
